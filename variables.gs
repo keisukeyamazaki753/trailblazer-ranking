@@ -13,6 +13,9 @@ let contestURLBase = "https://trailblazer.me/id/";
 let phantomURL = 'https://phantomjscloud.com/api/browser/v2/';
 // let phantomKey = 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx';
 
+// Github URL
+let githubURL = 'https://github.com/keisukeyamazaki753/trailblazer-ranking';
+
 // ======= HTML表示用 ==========
  
 // ロゴ画像
