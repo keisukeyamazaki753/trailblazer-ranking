@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <base target="_top">
+    <title>Trailheadランキング</title>
+    <style>
+    table {
+      width: 80%;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    table tr th,
+    table tr td {
+      padding: 0 10px;
+      border: 1px solid #DDD;
+      vertical-align: middle;
+    }
+
+    table tr th {
+      text-align: center;
+      font-weight: bold;
+    }
+    
+    table tr:nth-child(odd) td {
+      background: #e6e4e1;
+    }
+    
+    .mL100 {
+      margin-left: 100px;
+    }
+    
+    .mR100 {
+      margin-right: 100px;
+    }
+    
+    .grayLine{
+      background: linear-gradient(transparent 30%, #D3D3D3 30%);
+    }
+  </style>
+  </head>
+  <body bgcolor="#f5f4f0">
+    <header>
+      <!-- ロゴ画像の表示 -->
+      <div ><? output._ = logoIMGTag; ?></div>
+      <div align="center" style="margin-top:15px;float:left">
+        参加者のバッジ合計：<font size="7"><?= allBadgeDisplay? allBadgeDisplay.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') : '-'; ?></font>&nbsp;個!!</div>
+      <div align="right" class="mR100">
+        <div style="font-size:12px;">※このページをブックマークしてください。</div><br/>
+        <div style="font-size:12px;">ランキングは常時参加受付中！1！<br/><?= joinURL; ?><br/></div>
+      </div>
+      <div style="clear:left;"/>
+    </header>
+    
+    <table>
+    <tr>
+      <th>順位</th>
+      <th>名前</th>
+      <th style="line-height: 10px;text-align:left;font-weight: normal;">
+        <span style="font-size: xx-small;color: #a32c00">Certifications</span>
+        <br/>
+        <span style="font-size: xx-small;color: gray">Superbadges</span>
+        </th>
+      <th>ランク</th>
+      <th>バッジ</th>
+      <th>ポイント</th>
+      <th>最近のバッジ</th>
+      
+    </tr>
+      <?
+        var myData = SpreadsheetApp.getActiveSheet().getDataRange().getValues();
+        // 人数分のループ
+        for(var i=0;i<myData.length;i++){
+          output._ = '<tr>';
+          
+          // 順位の表示
+          output._ = '<td style="text-align:right;height:30px;">' + (i+1) + '</td>';
+          
+          // 名前を表示
+          output._ = '<td nowrap>' + myData[i][1] + '</td>';
+          
+          // 資格数とスーパーバッジ数を表示
+          output._ = '<td nowrap style="line-height: 10px;">';
+          // 資格
+          output._ = '<span style="font-size: xx-small;color: #a32c00">';
+          for(var star=0;star<myData[i][7];star++){
+            output._ = '+';
+          }
+          output._ = '</span><br/>';
+          // スーパーバッジ
+          output._ = '<span style="font-size: xx-small;color: gray">';
+          for(var star=0;star<myData[i][8];star++){
+            output._ = '+';
+          }
+          output._ = '</span>　</td>';
+          
+          for(var j=1;j<myData[i].length;j++){ 
+            var name 
+            // 無視する列
+            if(j === 1 || j === 2 || j === 7 || j === 8){
+              continue;
+            // 3桁カンマ区切りのメソッドがJSしか見つからないのでここで対応。。
+            } else if(j === 5 || j === 4){
+              output._ = '<td style="text-align:right;">' + Number(myData[i][j]).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+              output._ = '</td>';
+            } else {
+              output._ = myData[i][j];
+            }
+          }
+          // 削除ボタン
+          output._ = '<td><input type="button" value="x" onClick="unRegist(\'' + myData[i][0] + '\');" /></td>';
+          output._ = '</tr>';
+        }
+      ?>
+    </table>
+    <div align="right" style="margin-right:100px;">Data:<?= lastDateDisplay; ?></div>
+    <div align="right" style="margin-right:100px;">Updated every 4 hours</div>
+    <!-- エラーメッセージ -->
+    <p><?= errMessage; ?>
+       <!-- <br/><?= errMessage2; ?> -->
+    </p>
+
+    <script>
+      function unRegist(text){
+      
+        //window.alert('バグのため機能停止中。緊急で消したい人は管理者までご連絡ください。');
+        //return;
+
+	    // 「OK」時の処理開始 ＋ 確認ダイアログの表示
+	    if(window.confirm('こちらのユーザの登録を解除します。よろしいですか？')){
+          google.script.run.unRegistUserID(text);
+          window.alert('解除が完了しました。次回の更新時に反映されます。２回実行すると別の人が解除されてしまうため注意してください。');
+    	}
+      }
+    </script>
+  </body>
+</html>
+
+
