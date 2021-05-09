@@ -5,7 +5,7 @@ GASを使用したWebスクレイピングという技術になります。
 PhantomJSを使用してフェッチを行っています。
 
 フェッチのリクエストが有限のため更新方法はサイトのリクエスト毎ではなく定時更新です。  
-参加人数30名程度であれば４時間毎に更新できます。
+参加人数20名程度であれば４時間毎に更新できます。
 
 規模や頻度を拡大したい場合はPhantomJSを有料アカウントにしてください。
 
@@ -16,8 +16,10 @@ PhantomJSを使用してフェッチを行っています。
 
 実際に使用しているスプレッドシートのIDやPhantomJSのAPI Key等はignoreしています。
 
-同じようなものを検討されている方はコメントいただけると嬉しいです。  
-一緒にやりましょう！
+# 課題
+３回に一度程度、更新が失敗する。
+PhantomJのSリクエスト量が多すぎる模様。
+{"name":"HttpStatusCodeException","message":"OUT OF CREDITS: Your account is out of both Daily Subscription Credits and Prepaid Credits. Either wai..
 
 # 対応検討中
 PhantomJSからChromeのヘッドレスブラウザへの変更
