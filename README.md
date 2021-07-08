@@ -21,5 +21,9 @@ PhantomJSを使用してフェッチを行っています。
 PhantomJのSリクエスト量が多すぎる模様。
 {"name":"HttpStatusCodeException","message":"OUT OF CREDITS: Your account is out of both Daily Subscription Credits and Prepaid Credits. Either wai..
 
+2021/07/29 追記  
+肝心のバッジ数のコンポーネントがshadow DOM化してしまったため、取得できなくなってしまいました。
+PhantomJSによる回避は難しいかもしれません。対応保留中です。
+
 # 対応検討中
 PhantomJSからChromeのヘッドレスブラウザへの変更
